@@ -1,41 +1,39 @@
-import axios from 'axios';
-import { createAsyncThunk } from '@reduxjs/toolkit';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-axios.defaults.baseURL =
-  'https://63f5d6d959c944921f67858f.mockapi.io/goit-react-hw-07-phonebook';
+export const contactsApi = createApi({
+  reducerPath: 'contactsApi',
+  baseQuery: fetchBaseQuery({
+    baseUrl:
+      'https://63f5d6d959c944921f67858f.mockapi.io/goit-react-hw-07-phonebook',
+  }),
+  tagTypes: ['Contacts'],
+  endpoints: builder => ({
+    getContacts: builder.query({
+      query: () => `contacts`,
+      providesTags: ['Contacts'],
+    }),
 
-export const fetchContacts = createAsyncThunk(
-  'contacts/fetchAll',
-  async (_, thunkAPI) => {
-    try {
-      const response = await axios.get('/contacts');
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+    addContact: builder.mutation({
+      query: values => ({
+        url: `contacts`,
+        method: 'POST',
+        body: values,
+      }),
+      invalidatesTags: ['Contacts'],
+    }),
 
-export const addContact = createAsyncThunk(
-  'contacts/addContact',
-  async ({ name, phone }, thunkAPI) => {
-    try {
-      const response = await axios.post('/contacts', { name, phone });
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+    deleteContact: builder.mutation({
+      query: id => ({
+        url: `contacts/${id}`,
+        method: 'DELETE',
+      }),
+      invalidatesTags: ['Contacts'],
+    }),
+  }),
+});
 
-export const deleteContact = createAsyncThunk(
-  'contacts/deleteContact ',
-  async (id, thunkAPI) => {
-    try {
-      const response = await axios.delete(`/contacts/${id}`);
-      return response.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
+export const {
+  useGetContactsQuery,
+  useAddContactMutation,
+  useDeleteContactMutation,
+} = contactsApi;

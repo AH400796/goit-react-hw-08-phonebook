@@ -7,25 +7,32 @@ import {
   ListItemButton,
 } from './ContactListItem.styled';
 import { TiUser, TiDelete } from 'react-icons/ti';
-import { useDispatch } from 'react-redux';
-import { deleteContact } from 'redux/operations';
+import { BsTelephoneForwardFill } from 'react-icons/bs';
+import { useDeleteContactMutation } from 'redux/operations';
+import Spinner from 'components/Spinner';
 
 export default function ContactListItem({ name, phone, id }) {
-  const dispatch = useDispatch();
+  const [deleteContact, { isLoading, error }] = useDeleteContactMutation();
 
   return (
     <UserWrapper>
       <Wrapper>
-        <TiUser size={25} color={'darkpurple'} />
-        <ListItem>{name}:</ListItem>
+        <TiUser size={25} color={'#09139c'} />
+        <ListItem>{name}</ListItem>
       </Wrapper>
       <NumberWrapper>
+        <BsTelephoneForwardFill size={18} color={'#09139c'} />
         <ListItem>{phone}</ListItem>
         <ListItemButton
           type="button"
-          onClick={() => dispatch(deleteContact(id))}
+          onClick={() => deleteContact(id)}
+          disabled={isLoading}
         >
-          <TiDelete size={25} color={'black'} />
+          {isLoading && !error ? (
+            <Spinner size={25} />
+          ) : (
+            <TiDelete size={25} color={'#c00a0a'} />
+          )}
         </ListItemButton>
       </NumberWrapper>
     </UserWrapper>

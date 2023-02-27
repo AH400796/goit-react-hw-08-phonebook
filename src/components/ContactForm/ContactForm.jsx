@@ -8,9 +8,8 @@ import {
   Input,
   ErrWrapper,
 } from './ContactForm.styled';
-import { useSelector, useDispatch } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
-import { addContact } from 'redux/operations';
+import Loader from 'components/Loader';
+import { useAddContactMutation, useGetContactsQuery } from 'redux/operations';
 
 const initialsValues = {
   name: '',
@@ -23,18 +22,17 @@ const FormSchema = yup.object().shape({
 });
 
 export default function ContactForm() {
-  const contacts = useSelector(selectContacts);
-
-  const dispatch = useDispatch();
+  const { data } = useGetContactsQuery();
+  const [addContact, { error, isLoading }] = useAddContactMutation();
 
   const handleSubmitForm = (values, { resetForm }) => {
-    const existingUsers = contacts.map(contact => contact.name);
+    const existingUsers = data.map(contact => contact.name);
 
     if (existingUsers.includes(values.name)) {
       alert(`${values.name} is already in contacts`);
       return;
     }
-    dispatch(addContact(values));
+    addContact(values);
     resetForm();
   };
 
@@ -46,20 +44,22 @@ export default function ContactForm() {
     >
       {props => (
         <AddingForm>
-          <InputLabel>
-            Name
-            <Input type="text" name="name" placeholder="Andrii Hokhman" />
-            <ErrWrapper>
-              <ErrorMessage name="name" />
-            </ErrWrapper>
-          </InputLabel>
-          <InputLabel>
-            Phonenumber
-            <Input type="tel" name="phone" placeholder="+380XXXXXXXXX" />
-            <ErrWrapper>
-              <ErrorMessage name="phone" />
-            </ErrWrapper>
-          </InputLabel>
+          <div>
+            <InputLabel>
+              Name
+              <Input type="text" name="name" placeholder="Andrii Hokhman" />
+              <ErrWrapper>
+                <ErrorMessage name="name" />
+              </ErrWrapper>
+            </InputLabel>
+            <InputLabel>
+              Phone number
+              <Input type="tel" name="phone" placeholder="+380XXXXXXXXX" />
+              <ErrWrapper>
+                <ErrorMessage name="phone" />
+              </ErrWrapper>
+            </InputLabel>
+          </div>
           <Button
             type="submit"
             disabled={
@@ -68,7 +68,7 @@ export default function ContactForm() {
                 : true
             }
           >
-            Add contact
+            {isLoading && !error ? <Loader size={50} /> : ' Add contact'}
           </Button>
         </AddingForm>
       )}

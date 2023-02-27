@@ -10,9 +10,9 @@ export const UserWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  max-width: 500px;
-  padding: 2px 5px 2px 10px;
-  border-radius: 5px;
+  max-width: 600px;
+  padding: 5px 5px 5px 10px;
+  border-radius: 20px;
   margin-bottom: 10px;
   background-color: #8ed9fc;
   box-shadow: 2px 2px 5px #3d3d3d;
@@ -31,7 +31,7 @@ export const Wrapper = styled.div`
 export const NumberWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 60px;
+  gap: 15px;
 `;
 export const ListItemButton = styled.button`
   padding: 0;
