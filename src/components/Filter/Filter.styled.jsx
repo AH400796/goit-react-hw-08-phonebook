@@ -37,3 +37,11 @@ export const Quantity = styled.span`
 
   color: #14084e;
 `;
+
+export const QuantityWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  gap: 11px;
+`;

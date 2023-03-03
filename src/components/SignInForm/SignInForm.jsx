@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
+
 import { showContactsList } from 'redux/contactsFormSlice';
 import { signIn } from 'redux/operations';
 import { Formik, ErrorMessage } from 'formik';
-// import * as yup from 'yup';
-import 'yup-phone';
+import * as yup from 'yup';
 import {
   LoginFormStyled,
   InputLabel,
@@ -13,10 +13,10 @@ import {
   Wrapper,
 } from './SignInForm.styled';
 
-// const FormSchema = yup.object().shape({
-//   name: yup.string().min(2).required(),
-//   number: yup.string().min(13).max(13).phone('UA').required(),
-// });
+const FormSchema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().min(8).max(13).required(),
+});
 
 const initialsValues = {
   email: '',
@@ -41,7 +41,7 @@ export default function SignInForm() {
     <Formik
       initialValues={initialsValues}
       onSubmit={handleSubmitForm}
-      // validationSchema={FormSchema}
+      validationSchema={FormSchema}
     >
       {props => (
         <LoginFormStyled>

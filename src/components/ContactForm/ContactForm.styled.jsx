@@ -4,10 +4,10 @@ import { Form, Field } from 'formik';
 export const AddingForm = styled(Form)`
   display: flex;
   align-items: flex-end;
-  gap: 150px;
+  gap: 50px;
   width: 800px;
   margin-bottom: 30px;
-  padding: 20px;
+  padding: 20px 0 40px 20px;
   font-weight: 500;
 
   color: #2e1392;
@@ -25,7 +25,7 @@ export const InputLabel = styled.label`
 `;
 
 export const Input = styled(Field)`
-  max-width: 300px;
+  width: 250px;
   outline: transparent;
   padding: 10px 10px;
   font-size: 16px;
@@ -41,9 +41,9 @@ export const Input = styled(Field)`
 `;
 export const ErrWrapper = styled.span`
   font-size: 14px;
-  color: red;
+  color: #b10606;
   position: absolute;
-  bottom: -20px;
+  top: 76px;
 `;
 
 export const InputWrapper = styled.div`

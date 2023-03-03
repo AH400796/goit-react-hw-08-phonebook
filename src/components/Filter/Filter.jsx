@@ -3,6 +3,7 @@ import {
   FilterInput,
   FilterWrapper,
   Quantity,
+  QuantityWrapper,
 } from './Filter.styled';
 import { useSelector, useDispatch } from 'react-redux';
 import { selectFilter } from 'redux/selectors';
@@ -29,10 +30,10 @@ export default function Filter() {
           onChange={handleFilterInputChange}
         />
       </InputLabel>
-      <div>
+      <QuantityWrapper>
         <span>Number of contacts:</span>
         <Quantity>{contactsQuantity}</Quantity>
-      </div>
+      </QuantityWrapper>
     </FilterWrapper>
   );
 }
