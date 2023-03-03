@@ -8,37 +8,32 @@ import {
   Input,
   ErrWrapper,
   InputWrapper,
-} from './ContactForm.styled';
+} from './EditContactForm.styled';
 import Loader from 'components/Loader';
-import { useAddContactMutation, useGetContactsQuery } from 'redux/operations';
-import { showContactsList } from 'redux/contactsFormSlice';
-import { useDispatch } from 'react-redux';
+import { useEditContactMutation } from 'redux/operations';
 
-const initialsValues = {
-  name: '',
-  number: '',
-};
+import { useDispatch, useSelector } from 'react-redux';
+import { selectEditContact } from 'redux/selectors';
+import { showEditingForm } from 'redux/contactsFormSlice';
 
 const FormSchema = yup.object().shape({
   name: yup.string().min(2).required(),
   number: yup.string().min(13).max(13).phone('UA').required(),
 });
 
-export default function ContactForm() {
+export default function EditContactForm() {
   const dispatch = useDispatch();
+  const { name, number, id } = useSelector(selectEditContact);
+  const [editContact, { error, isLoading }] = useEditContactMutation();
 
-  const { data } = useGetContactsQuery();
-  const [addContact, { error, isLoading }] = useAddContactMutation();
+  const initialsValues = {
+    name,
+    number,
+  };
 
   const handleSubmitForm = (values, { resetForm }) => {
-    const existingUsers = data.map(contact => contact.name);
-
-    if (existingUsers.includes(values.name)) {
-      alert(`${values.name} is already in contacts`);
-      return;
-    }
-    addContact(values);
-    dispatch(showContactsList(true));
+    editContact({ id, values });
+    dispatch(showEditingForm(null));
     resetForm();
   };
 
@@ -75,7 +70,7 @@ export default function ContactForm() {
                   : true
               }
             >
-              {isLoading && !error ? <Loader size={50} /> : ' Add contact'}
+              {isLoading && !error ? <Loader size={50} /> : ' Edit contact'}
             </Button>
           </div>
         </AddingForm>

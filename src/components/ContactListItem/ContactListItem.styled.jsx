@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ListItem = styled.li`
   font-size: 20px;
   font-weight: 500;
+  color: #14084e; ;
 `;
 
 export const UserWrapper = styled.div`
@@ -10,7 +11,7 @@ export const UserWrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   gap: 10px;
-  max-width: 600px;
+  width: 100%;
   padding: 5px 5px 5px 10px;
   border-radius: 20px;
   margin-bottom: 10px;

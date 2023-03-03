@@ -1,24 +1,21 @@
 import styled from 'styled-components';
 
-export const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-top: 60px;
-  padding-left: 100px;
-
-  font-size: 40px;
-  color: #010101;
-`;
-
-export const Title = styled.h1`
-  color: #2e1392;
-  font-size: 36px;
+export const Title = styled.h2`
   margin-bottom: 20px;
+  padding: 10px 20px;
+  font-size: 24px;
+
+  border-radius: 20px;
+  background-color: #72c0e4;
+  color: #2e1392;
+  box-shadow: 2px 2px 5px #3d3d3d;
 `;
 
 export const ContactsWrapper = styled.div`
-  width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 800px;
   min-height: 160px;
   padding: 20px;
   background-color: #828bbd;

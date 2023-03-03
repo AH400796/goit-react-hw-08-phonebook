@@ -23,8 +23,10 @@ export default function ContactList() {
     <List>
       {visibleContacts.length !== 0 &&
         visibleContacts.map(contact => {
-          const { name, id, phone } = contact;
-          return <ContactListItem key={id} id={id} name={name} phone={phone} />;
+          const { name, id, number } = contact;
+          return (
+            <ContactListItem key={id} id={id} name={name} number={number} />
+          );
         })}
     </List>
   );
