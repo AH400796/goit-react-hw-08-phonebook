@@ -1,3 +1,6 @@
+import { useDispatch } from 'react-redux';
+import { showContactsList } from 'redux/contactsFormSlice';
+import { signIn } from 'redux/operations';
 import { Formik, ErrorMessage } from 'formik';
 // import * as yup from 'yup';
 import 'yup-phone';
@@ -9,9 +12,6 @@ import {
   ErrWrapper,
   Wrapper,
 } from './SignInForm.styled';
-
-import { useDispatch } from 'react-redux';
-import { signIn } from 'redux/operations';
 
 // const FormSchema = yup.object().shape({
 //   name: yup.string().min(2).required(),
@@ -34,6 +34,7 @@ export default function SignInForm() {
       })
     );
     resetForm();
+    dispatch(showContactsList(true));
   };
 
   return (

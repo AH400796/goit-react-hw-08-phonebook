@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux';
+import { showContactsList } from 'redux/contactsFormSlice';
 import { signUp } from 'redux/operations';
 import { Formik, ErrorMessage } from 'formik';
 // import * as yup from 'yup';
@@ -34,6 +35,7 @@ export default function SignUpForm() {
       })
     );
     resetForm();
+    dispatch(showContactsList(true));
   };
 
   return (
