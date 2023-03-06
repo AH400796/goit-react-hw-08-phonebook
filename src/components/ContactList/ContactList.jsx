@@ -19,6 +19,7 @@ export default function ContactList() {
           )
           .sort((a, b) => a.name.localeCompare(b.name))
       : [];
+
   return (
     <List>
       {visibleContacts.length !== 0 &&

@@ -7,6 +7,7 @@ import {
   Wrapper,
   NumberWrapper,
   ListItemButton,
+  NumberLink,
 } from './ContactListItem.styled';
 import { TiUser, TiDelete, TiEdit } from 'react-icons/ti';
 import { BsTelephoneForwardFill } from 'react-icons/bs';
@@ -21,21 +22,25 @@ export default function ContactListItem({ name, number, id }) {
     dispatch(showEditingForm({ name, number, id }));
   };
 
+  const tel = `tel:${number}`;
+
   return (
     <UserWrapper>
       <Wrapper>
-        <TiUser size={25} color={'#09139c'} />
+        <TiUser size={25} color={'inherit'} />
         <ListItem>{name}</ListItem>
       </Wrapper>
       <NumberWrapper>
-        <BsTelephoneForwardFill size={18} color={'#09139c'} />
-        <ListItem>{number}</ListItem>
+        <NumberLink href={tel}>
+          <BsTelephoneForwardFill size={18} color={'inherit'} />
+          <ListItem>{number}</ListItem>
+        </NumberLink>
         <ListItemButton
           type="button"
           onClick={handleEditButton}
           disabled={isLoading}
         >
-          <TiEdit size={25} color={'#09139c'} />
+          <TiEdit size={25} color={'inherit'} />
         </ListItemButton>
         <ListItemButton
           type="button"

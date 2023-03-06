@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ListItem = styled.li`
   font-size: 20px;
   font-weight: 500;
-  color: #14084e; ;
+  color: inherit; ;
 `;
 
 export const UserWrapper = styled.div`
@@ -27,12 +27,27 @@ export const Wrapper = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  color: #170674;
+`;
+
+export const NumberLink = styled.a`
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #170674;
+
+  &:hover,
+  &:focus {
+    color: #d85b13;
+  }
 `;
 
 export const NumberWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 20px;
+  color: #170674;
 `;
 export const ListItemButton = styled.button`
   padding: 0;
@@ -41,4 +56,10 @@ export const ListItemButton = styled.button`
   border-radius: 50%;
   cursor: pointer;
   background-color: transparent;
+  color: #170674;
+
+  &:hover,
+  &:focus {
+    color: #d85b13;
+  }
 `;
